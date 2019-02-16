@@ -3,9 +3,11 @@ cmake_minimum_required(VERSION 3.2)
 project(moneybox)
 
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
-conan_basic_setup()
+conan_basic_setup(TARGETS)
 
 add_executable(${PROJECT_NAME} "main.cpp")
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)
-target_include_directories(${PROJECT_NAME} PRIVATE ${CONAN_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME} ${CONAN_LIBS})
+target_link_libraries(${PROJECT_NAME}
+    CONAN_PKG::boost
+    CONAN_PKG::gsl_microsoft
+)
