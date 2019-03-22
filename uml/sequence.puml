@@ -1,0 +1,12 @@
+@startuml
+Client -> http : send data
+http -> api : request
+api -> controller : handle
+controller -> model : select / insert
+model --> controller : data
+controller -> view : fill
+view --> controller : document
+controller --> api : document
+api --> http : response
+http --> Client : send data
+@enduml
