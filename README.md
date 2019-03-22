@@ -1,3 +1,4 @@
+# Build
 ```Shell
 mkdir build
 cd build
@@ -8,42 +9,61 @@ cmake -build .
 
 # Protocol
 
-/amount - ₽
+#### Get balance of the account ₽
+/amount
+
 in:
+```json
 {
     "user": <string>
 }
+```
 out:
+```json
 {
     "amount": <number>
 }
+```
 
-/transfer - The list of transfers
+#### Get list of transfers
+/transfer
+
 in:
+```json
 {
     "user": <string>
 }
+```
 out:
+```json
 [
-{
-    "id": <number>,
-    "sender": <string>
-    "recipient": <string>,
-    "amount": <number>,
-    "description": <string>
-},
+    {
+    
+        "id": <number>,
+        "sender": <string>
+        "recipient": <string>,
+        "amount": <number>,
+        "description": <string>
+    },
 ...
 ]
+```
 
-/transfer/send - Send money
+#### Send money
+/transfer/send
+
 in:
+```json
 {
     "user": <string>
     "recipient": <string>,
     "amount": <number>,
     "description": <string>
 }
+```
 out:
+```json
 {
-    "result": <int>
+    "result": <number>
 }
+```
