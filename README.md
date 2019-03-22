@@ -40,7 +40,7 @@ out:
     {
     
         "id": <number>,
-        "sender": <string>
+        "sender": <string>,
         "recipient": <string>,
         "amount": <number>,
         "description": <string>
@@ -55,7 +55,7 @@ out:
 in:
 ```json
 {
-    "user": <string>
+    "user": <string>,
     "recipient": <string>,
     "amount": <number>,
     "description": <string>
