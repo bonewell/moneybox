@@ -1,0 +1,31 @@
+@startuml
+namespace api {
+    interface Api {
+        + execute([inout] rpc : Rpc)
+    }
+    interface Rpc {
+        + type() Type
+        + request() : string
+        + response(text : string)
+    }
+    enum Type
+}
+namespace http {
+    class Handle {
+        - type : api.Type
+        - request : string
+        - response : string
+        + type(type : api.Type)
+        + request(text : string)
+        + response() : string
+    }
+    class Server {
+        - api : Api
+    }
+
+    api.Rpc <|.. Handle
+    api.Type <.. Handle
+    Handle <. Server : create
+    Server o. api.Api
+}
+@enduml

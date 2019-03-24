@@ -1,0 +1,22 @@
+@startuml
+namespace api {
+    enum Type {
+        json
+        xml
+        yaml
+    }
+    interface Rpc {
+        + type() : Type
+        + request() : string
+        + response(data : string)
+    }
+    interface Api {
+        + execute([inout] rpc : Rpc)
+    }
+    class MoneyBox
+
+    Api <|.. MoneyBox
+    Rpc <. MoneyBox
+    MoneyBox .> Type
+}
+@enduml

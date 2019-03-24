@@ -1,0 +1,14 @@
+@startuml
+namespace controller {
+    interface Controller {
+        + execute()
+    }
+    class Amount
+    class Transfer
+    class TransferSend
+
+    Controller <|.. Amount
+    Controller <|.. Transfer
+    Controller <|.. TransferSend
+}
+@enduml
