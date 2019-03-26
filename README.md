@@ -64,6 +64,6 @@ in:
 out:
 ```json
 {
-    "result": <number>
+    "result": <boolean>
 }
 ```

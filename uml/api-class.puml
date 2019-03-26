@@ -1,22 +1,26 @@
 @startuml
 namespace api {
-    enum Type {
-        json
-        xml
-        yaml
-    }
     interface Rpc {
-        + type() : Type
+        + name() : string
         + request() : string
         + response(data : string)
     }
     interface Api {
         + execute([inout] rpc : Rpc)
     }
-    class MoneyBox
+    class MoneyBox {
+        - factory : controller.Factory
+    }
 
     Api <|.. MoneyBox
     Rpc <. MoneyBox
-    MoneyBox .> Type
+    MoneyBox ..> controller.Controller
+    MoneyBox ..> controller.Factory
+}
+namespace controller {
+    interface Controller
+    class Factory
+
+    Factory .> Controller : create
 }
 @enduml

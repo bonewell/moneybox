@@ -1,7 +1,10 @@
 @startuml
 namespace controller {
     interface Controller {
-        + execute()
+        + execute(args : json) : json
+    }
+    class Factory {
+        + create(name : string) : Controller
     }
     class Amount
     class Transfer
@@ -10,5 +13,16 @@ namespace controller {
     Controller <|.. Amount
     Controller <|.. Transfer
     Controller <|.. TransferSend
+    Amount <.. Factory : create
+    Transfer <.. Factory : create
+    TransferSend <.. Factory : create
+    model.User <.. Amount
+    Amount ..> view.Amount
+}
+namespace view {
+    class Amount
+}
+namespace model {
+    class User
 }
 @enduml

@@ -1,0 +1,26 @@
+@startuml
+namespace model {
+    abstract class Item {
+        + save()
+        + fetch(key : string, value)
+        + load(key : string)
+    }
+    class User {
+        + id : integer
+        + name : string
+        + amount : integer
+        + transfers : TransferList
+    }
+    class Transfer {
+        + id : integer
+        + sender : integer
+        + recipient : integer
+        + amount : integer
+        + description : string
+    }
+
+    Item <|-- User
+    Item <|-- Transfer
+    User o. "*" Transfer
+}
+@enduml
