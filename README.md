@@ -67,3 +67,6 @@ out:
     "result": <boolean>
 }
 ```
+
+# UML
+[moneybox/wiki](https://github.com/bonewell/moneybox/wiki)
