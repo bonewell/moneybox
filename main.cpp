@@ -2,8 +2,8 @@
 
 #include <boost/asio.hpp>
 #include <gsl/gsl>
-#include <mongocxx/instance.hpp>
-#include <mongocxx/client.hpp>
+
+#include "model/user.h"
 
 using namespace std;
 
@@ -13,11 +13,13 @@ void get(gsl::owner<int*> x) {
 
 int main()
 {
-    mongocxx::instance instance{};
-    mongocxx::client client{mongocxx::uri{}};
-
     cout << "Hello World!" << endl;
     get(new int{});
+
+    model::User user;
+    user.name = "Bone";
+    user.amount = 777;
+    user.save();
 
     return 0;
 }
