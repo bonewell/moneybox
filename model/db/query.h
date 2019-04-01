@@ -1,5 +1,5 @@
-#ifndef QUERY_H
-#define QUERY_H
+#ifndef MODEL_DB_QUERY_H
+#define MODEL_DB_QUERY_H
 
 namespace model::db {
 
@@ -13,4 +13,4 @@ public:
 
 }  // namespace model::db
 
-#endif // QUERY_H
+#endif // MODEL_DB_QUERY_H

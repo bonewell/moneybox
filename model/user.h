@@ -1,25 +1,18 @@
 #ifndef MODEL_USER_H
 #define MODEL_USER_H
 
-#include <vector>
-#include <string>
-
-#include "item.h"
+#include "field.h"
+#include "table.h"
 
 namespace model {
 
-using TransferList = std::vector<int>;
-
-/**
- * @brief The User class
- */
-class User : public Item {
+class User : public Table {
 public:
-    int id{0};
-    std::string name{};
-    long long amount{0};
-    TransferList transfers{};
+    Integer id{"id", this};
+    Text name{"name", this};
+    LongLong amount{"amount", this};
 };
+
 }  // namespace model
 
 #endif // MODEL_USER_H

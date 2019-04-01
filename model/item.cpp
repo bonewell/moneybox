@@ -24,14 +24,4 @@ void Item::save()
     auto res = collection.insert_one(std::move(doc_value));
 }
 
-void Item::fetch()
-{
-
-}
-
-void Item::load()
-{
-
-}
-
-}
+}  // namespace model

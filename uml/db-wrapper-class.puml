@@ -1,28 +1,28 @@
 @startuml
 hide empty members
-namespace db {
+namespace model.db {
     interface Query {
         + where(condition)
         + execute()
         + get(name : string, value [out])
     }
-    interface Command {
-        + set(name : string, value)
-        + execute()
-    }
     interface Factory {
         + query() : Query
         + command() : Command
     }
-    class MongoCommand
+    interface Command {
+        + set(name : string, value)
+        + execute()
+    }
     class MongoQuery
     class MongoFactory
+    class MongoCommand
 
 
     Query <|.. MongoQuery
-    Command <|.. MongoCommand
     Factory <|.. MongoFactory
-    MongoCommand <.. MongoFactory : create
-    MongoQuery <.. MongoFactory : create
+    Command <|.. MongoCommand
+    MongoQuery <. MongoFactory : create
+    MongoFactory .> MongoCommand : create
 }
 @enduml

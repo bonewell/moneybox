@@ -1,10 +1,10 @@
-#ifndef FACTORY_H
-#define FACTORY_H
+#ifndef MODEL_DB_FACTORY_H
+#define MODEL_DB_FACTORY_H
 
 #include <memory>
 
-#include "model/db/command.h"
-#include "model/db/query.h"
+#include "command.h"
+#include "query.h"
 
 namespace model::db {
 
@@ -21,4 +21,4 @@ public:
 
 }  // namespace model::db
 
-#endif // FACTORY_H
+#endif // MODEL_DB_FACTORY_H

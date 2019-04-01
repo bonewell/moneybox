@@ -1,5 +1,5 @@
-#ifndef MONGOFACTORY_H
-#define MONGOFACTORY_H
+#ifndef MODEL_DB_MONGOFACTORY_H
+#define MODEL_DB_MONGOFACTORY_H
 
 #include "model/db/factory.h"
 
@@ -12,4 +12,4 @@ public:
 };
 }  // namespace mongo::db
 
-#endif // MONGOFACTORY_H
+#endif // MODEL_DB_MONGOFACTORY_H

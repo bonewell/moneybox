@@ -1,5 +1,5 @@
-#ifndef COMMAND_H
-#define COMMAND_H
+#ifndef MODEL_DB_COMMAND_H
+#define MODEL_DB_COMMAND_H
 
 namespace model::db {
 
@@ -12,4 +12,4 @@ public:
 
 }  // namespace model::db
 
-#endif // COMMAND_H
+#endif // MODEL_DB_COMMAND_H

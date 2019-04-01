@@ -1,23 +1,20 @@
 #ifndef MODEL_TRANSFER_H
 #define MODEL_TRANSFER_H
 
-#include <string>
-
-#include "item.h"
+#include "field.h"
+#include "table.h"
 
 namespace model {
 
-/**
- * @brief The Transfer class
- */
-class Transfer : public Item {
+class Transfer : public Table {
 public:
-    int id{0};
-    int sender{0};
-    int recipient{0};
-    long long amount{0};
-    std::string description{};
+    Integer id{"id", this};
+    Integer sender{"sender", this};
+    Integer recipient{"recipient", this};
+    LongLong amount{"amount", this};
+    Text description{"description", this};
 };
+
 }  // namespace model
 
 #endif // MODEL_TRANSFER_H

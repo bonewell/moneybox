@@ -3,14 +3,12 @@
 #include <boost/asio.hpp>
 #include <gsl/gsl>
 
-//#include "model/user.h"
-
 //#include "model/test.h"
 
 #include <type_traits>
 #include <variant>
 
-#include "model/table.h"
+#include "model/user.h"
 
 using namespace std;
 
@@ -29,7 +27,7 @@ int main()
 //    user.save();
 
 
-    User u;
+    model::User u;
     u.id = 3;
     u.name = "Bone";
     u.amount = 777;
@@ -38,7 +36,7 @@ int main()
     int id = u.id;
     std::cout << typeid(id).name() << "\n";
 
-    User nu;
+    model::User nu;
     nu.fetch(nu.name = "Natat");
 
     std::variant<int, long long> v;
