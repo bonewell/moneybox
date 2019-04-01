@@ -1,4 +1,5 @@
 @startuml
+hide empty members
 namespace api {
     interface Api
     interface Rpc
