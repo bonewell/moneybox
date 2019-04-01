@@ -10,16 +10,19 @@ namespace db {
         + set(name : string, value)
         + execute()
     }
-    class MongoQuery
-    class MongoCommand
-    class Factory {
+    interface Factory {
         + query() : Query
         + command() : Command
     }
+    class MongoCommand
+    class MongoQuery
+    class MongoFactory
+
 
     Query <|.. MongoQuery
     Command <|.. MongoCommand
-    MongoCommand <.. Factory : create
-    MongoQuery <.. Factory : create
+    Factory <|.. MongoFactory
+    MongoCommand <.. MongoFactory : create
+    MongoQuery <.. MongoFactory : create
 }
 @enduml

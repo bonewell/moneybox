@@ -59,13 +59,13 @@ void Table::save() {
 
 void Table::fetch(const BaseField& condition) {
     struct query {int id;
-                  std::sting name;
+                  std::string name;
                   long long amount;};
     for (const auto* f: fields_) {
         std::visit([f](auto&& arg) {
             using type = std::decay_t<decltype (arg)>;
             if (std::holds_alternative<type>(f->value())) {
-                f->set<type>();
+//                f->set<type>();
             }
         }, f->value());
     }
