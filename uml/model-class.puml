@@ -1,26 +1,49 @@
 @startuml
+hide empty members
 namespace model {
-    abstract class Item {
+    class Variant {
+        int
+        string
+        long long
+    }
+    abstract class Table {
+        - fields : BaseFieldList
         + save()
-        + fetch(key : string, value)
-        + load(key : string)
+        + fetch(field: BaseField)
+        + {static} load() : TableList
+    }
+    abstract class BaseField {
+        - name : string
+        - value : Variant
+        - table : Table
+        + set(value : Variant)
+        + get() : Variant
+        + load()
+    }
+    class Field << template >> {
     }
     class User {
-        + id : integer
-        + name : string
-        + amount : integer
-        + transfers : TransferList
+        + id : Int
+        + name : Text
+        + amount : LongLong
     }
     class Transfer {
-        + id : integer
-        + sender : integer
-        + recipient : integer
-        + amount : integer
-        + description : string
+        + id : Int
+        + sender : Int
+        + recipient : Int
+        + amount : LongLong
+        + description : Text
     }
 
-    Item <|-- User
-    Item <|-- Transfer
-    User o. "*" Transfer
+    BaseField .> Variant
+    BaseField <|-- Field
+    Field <|-- Int
+    Field <|-- Text
+    Field <|-- LongLong
+    Table "1" .o BaseField
+    Table o. "*" BaseField
+    Table <|-- User
+    Table <|-- Transfer
+    Transfer o. "2" User
 }
 @enduml
