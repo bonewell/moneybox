@@ -19,7 +19,7 @@ void MongoQuery::get(const std::string& name, Variant& value) {
 //    }, f->value());
 }
 
-void MongoQuery::execute() {
+bool MongoQuery::execute() {
 //    mongocxx::pool pool{mongocxx::uri{}};
 
 //    auto client = pool.acquire();
@@ -34,6 +34,8 @@ void MongoQuery::execute() {
 //        this->amount = view["amount"].get_int64();
 //        this->desc = view["desc"].get_utf8().value.to_string();
 //    }
+//        std::get_if<T>(&f->value());
+    return false;
 }
 
 }  // namespace model::db

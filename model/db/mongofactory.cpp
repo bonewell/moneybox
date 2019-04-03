@@ -11,10 +11,9 @@ namespace model::db {
 
 namespace {
 static mongocxx::instance instance;
-static mongocxx::collection GetCollection() {
+static mongocxx::database db() {
     static mongocxx::pool pool{mongocxx::uri{}};
-    auto db = pool.acquire()->database("moneybox");
-    return db["main"];
+    return pool.acquire()->database("moneybox");
 }
 }  // namespace
 
@@ -24,13 +23,11 @@ Factory& MongoFactory::instance() {
 }
 
 QueryPtr MongoFactory::query() {
-    auto collection = GetCollection();
-    return std::make_unique<MongoQuery>();
+    return std::make_unique<MongoQuery>(db());
 }
 
 CommandPtr MongoFactory::command() {
-    auto collection = GetCollection();
-    return std::make_unique<MongoCommand>();
+    return std::make_unique<MongoCommand>(db());
 }
 
 }  // namespace model::db

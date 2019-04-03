@@ -17,7 +17,7 @@ public:
     explicit Entity(const std::string& name) : name_{name} {}
     void registry(BaseField* field);
     void save();
-    void fetch(const BaseField& condition);
+    bool fetch(const BaseField& condition);
 protected:
     static db::Factory& factory_;
 private:

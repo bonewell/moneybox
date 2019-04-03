@@ -23,14 +23,15 @@ void Entity::save() {
     command->execute();
 }
 
-void Entity::fetch(const BaseField& condition) {
+bool Entity::fetch(const BaseField& condition) {
     auto query = factory_.query();
     query->entity(name_);
     query->where(condition.name(), condition.value());
-    query->execute();
+    if (!query->execute()) return false;
     for (auto* f: fields_) {
         query->get(f->name(), f->value());
     }
+    return true;
 }
 
 }  // namespace model
