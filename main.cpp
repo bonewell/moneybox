@@ -3,11 +3,7 @@
 #include <boost/asio.hpp>
 #include <gsl/gsl>
 
-//#include "model/test.h"
-
-#include <type_traits>
-#include <variant>
-
+//#include "model/item.h"
 #include "model/user.h"
 
 using namespace std;
@@ -21,11 +17,15 @@ int main()
     cout << "Hello World!" << endl;
     get(new int{});
 
-//    model::User user;
-//    user.name = "Bone";
-//    user.amount = 777;
-//    user.save();
+//    model::Item i;
+//    i.id = 3;
+//    i.amount = 333;
+//    i.desc = "thre";
+//    i.save();
 
+//    model::Item o;
+//    o.fetch(3);
+//    std::cout << o.id << "-" << o.amount << "-" << o.desc << "\n";
 
     model::User u;
     u.id = 3;
@@ -33,17 +33,11 @@ int main()
     u.amount = 777;
     u.save();
 
-    int id = u.id;
-    std::cout << typeid(id).name() << "\n";
-
     model::User nu;
-    nu.fetch(nu.name = "Natat");
-
-    std::variant<int, long long> v;
-    auto x = std::get<0>(v);
-    using type = std::decay_t<decltype(x)>;
-    type y;
-    std::cout << typeid(y).name() << "\n";
+    nu.fetch(nu.name = "Bone");
+    std::cout << int{nu.id}
+              << std::string{nu.name}
+              << static_cast<long long>(nu.amount) << "\n";
 
     return 0;
 }

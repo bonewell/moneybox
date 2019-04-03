@@ -16,6 +16,8 @@ public:
     virtual ~BaseField() = default;
     const std::string& name() const;
     const Variant& value() const;
+
+protected:
     template<typename T>
     void set(const T& value) {
         value_ = value;
@@ -24,6 +26,7 @@ public:
     const T& get() const {
         return std::get<T>(value_);
     }
+
 private:
     const std::string name_;
     Table* table_;
@@ -34,7 +37,10 @@ template<typename T>
 class Field : public BaseField {
 public:
     using type_value = T;
-    using BaseField::BaseField;
+    Field(const std::string& name, Table* table)
+        : BaseField (name, table) {
+        set(type_value{});
+    }
     Field& operator=(type_value value) {
         set(value);
         return *this;

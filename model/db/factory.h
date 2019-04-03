@@ -11,13 +11,14 @@ namespace model::db {
 using QueryPtr = std::unique_ptr<Query>;
 using CommandPtr = std::unique_ptr<Command>;
 
-class Factory
-{
+class Factory {
 public:
     virtual QueryPtr query() = 0;
     virtual CommandPtr command() = 0;
     virtual ~Factory() = default;
 };
+
+extern Factory& GetFactory();
 
 }  // namespace model::db
 

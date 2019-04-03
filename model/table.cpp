@@ -1,5 +1,8 @@
 #include "table.h"
 
+#include "db/command.h"
+#include "db/factory.h"
+#include "db/query.h"
 #include "field.h"
 
 #include <iostream>
@@ -7,33 +10,27 @@
 
 namespace model {
 
+db::Factory& Table::factory_ = db::GetFactory();
+
 void Table::registry(BaseField* field) {
     fields_.push_back(field);
 }
 
 void Table::save() {
+    auto command = factory_.command();
     for (const auto* f: fields_) {
-        std::visit([f](auto&& arg) {
-            using type = std::decay_t<decltype(arg)>;
-            if (std::holds_alternative<type>(f->value())) {
-                std::cout << f->name() << ": " << std::get<type>(f->value()) << "\n";
-            }
-        }, f->value());
+        command->set(f);
     }
+    command->execute();
 }
 
 void Table::fetch(const BaseField& condition) {
-    struct query {int id;
-                  std::string name;
-                  long long amount;};
-    for (const auto* f: fields_) {
-        std::visit([f](auto&& arg) {
-            using type = std::decay_t<decltype (arg)>;
-            if (std::holds_alternative<type>(f->value())) {
-//                f->set<type>();
-            }
-        }, f->value());
+    auto query = factory_.query();
+    query->where(&condition);
+    for (auto* f: fields_) {
+        query->get(f);
     }
+    query->execute();
 }
 
 }  // namespace model

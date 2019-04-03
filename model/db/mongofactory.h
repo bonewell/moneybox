@@ -1,7 +1,7 @@
 #ifndef MODEL_DB_MONGOFACTORY_H
 #define MODEL_DB_MONGOFACTORY_H
 
-#include "model/db/factory.h"
+#include "factory.h"
 
 namespace model::db {
 

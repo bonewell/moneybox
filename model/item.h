@@ -1,20 +1,20 @@
 #ifndef MODEL_ITEM_H
 #define MODEL_ITEM_H
 
+#include <string>
+
 namespace model {
 
-/**
- * @brief The Item class
- */
 class Item
 {
 public:
     void save();
-    void fetch();
+    void fetch(int id);
     void load();
 
-protected:
-    ~Item() = default;
+    int id;
+    long long amount;
+    std::string desc;
 };
 }  // namespace model
 

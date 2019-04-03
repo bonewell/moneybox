@@ -5,6 +5,10 @@
 
 namespace model {
 
+namespace db {
+class Factory;
+}  // namespace db
+
 class BaseField;
 
 class Table {
@@ -12,6 +16,8 @@ public:
     void registry(BaseField* field);
     void save();
     void fetch(const BaseField& condition);
+protected:
+    static db::Factory& factory_;
 private:
     std::vector<BaseField*> fields_;
 };

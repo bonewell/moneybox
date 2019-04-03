@@ -7,7 +7,9 @@ conan_basic_setup(TARGETS)
 
 add_executable(${PROJECT_NAME}
     "main.cpp"
+    "model/db/mongocommand.cpp"
     "model/db/mongofactory.cpp"
+    "model/db/mongoquery.cpp"
     "model/field.cpp"
     "model/item.cpp"
     "model/table.cpp"
