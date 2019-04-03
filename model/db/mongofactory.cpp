@@ -18,8 +18,8 @@ static mongocxx::collection GetCollection() {
 }
 }  // namespace
 
-Factory& GetFactory() {
-    static MongoFactory factory{};
+Factory& MongoFactory::instance() {
+    static MongoFactory factory;
     return factory;
 }
 

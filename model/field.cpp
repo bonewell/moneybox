@@ -13,7 +13,11 @@ const std::string& BaseField::name() const {
     return name_;
 }
 
-const Variant& BaseField::value() const {
+const db::Variant& BaseField::value() const {
+    return value_;
+}
+
+db::Variant& BaseField::value() {
     return value_;
 }
 

@@ -8,7 +8,7 @@ MongoCommand::MongoCommand() {
 
 }
 
-void MongoCommand::set(const BaseField* field) {
+void MongoCommand::set(const std::string& name, const Variant& value) {
 //    std::visit([f](auto&& arg) {
 //        using type = std::decay_t<decltype(arg)>;
 //        if (std::holds_alternative<type>(f->value())) {

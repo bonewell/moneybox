@@ -8,8 +8,8 @@ namespace model::db {
 class MongoQuery : public Query {
 public:
     MongoQuery();
-    void where(const BaseField* condition) override;
-    void get(BaseField* field) override;
+    void where(const std::string& name, const Variant& condition) override;
+    void get(const std::string& name, Variant& value) override;
     void execute() override;
 };
 

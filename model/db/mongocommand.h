@@ -8,7 +8,7 @@ namespace model::db {
 class MongoCommand : public Command {
 public:
     MongoCommand();
-    void set(const BaseField* field) override;
+    void set(const std::string& name, const Variant& value) override;
     void execute() override;
 };
 

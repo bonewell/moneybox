@@ -18,8 +18,6 @@ public:
     virtual ~Factory() = default;
 };
 
-extern Factory& GetFactory();
-
 }  // namespace model::db
 
 #endif // MODEL_DB_FACTORY_H

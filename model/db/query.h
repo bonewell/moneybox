@@ -1,16 +1,16 @@
 #ifndef MODEL_DB_QUERY_H
 #define MODEL_DB_QUERY_H
 
-namespace model {
-class BaseField;
-}  // namespace model
+#include <string>
+
+#include "variant.h"
 
 namespace model::db {
 
 class Query {
 public:
-    virtual void where(const BaseField* condition) = 0;
-    virtual void get(BaseField* field) = 0;
+    virtual void where(const std::string& name, const Variant& condition) = 0;
+    virtual void get(const std::string& name, Variant& value) = 0;
     virtual void execute() = 0;
     virtual ~Query() = default;
 };

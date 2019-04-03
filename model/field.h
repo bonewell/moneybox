@@ -2,11 +2,10 @@
 #define MODEL_FIELD_H
 
 #include <string>
-#include <variant>
+
+#include "db/variant.h"
 
 namespace model {
-
-using Variant = std::variant<int, long long, std::string>;
 
 class Table;
 
@@ -15,7 +14,8 @@ public:
     BaseField(const std::string& name, Table* table);
     virtual ~BaseField() = default;
     const std::string& name() const;
-    const Variant& value() const;
+    const db::Variant& value() const;
+    db::Variant& value();
 
 protected:
     template<typename T>
@@ -30,7 +30,7 @@ protected:
 private:
     const std::string name_;
     Table* table_;
-    Variant value_;
+    db::Variant value_;
 };
 
 template<typename T>
@@ -48,6 +48,9 @@ public:
     operator type_value() const {
         return get<type_value>();
     }
+private:
+    using BaseField::name;
+    using BaseField::value;
 };
 
 using Integer = Field<int>;

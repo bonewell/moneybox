@@ -8,9 +8,11 @@
 #include <iostream>
 #include <variant>
 
+#include "db/mongofactory.h"
+
 namespace model {
 
-db::Factory& Table::factory_ = db::GetFactory();
+db::Factory& Table::factory_ = db::MongoFactory::instance();
 
 void Table::registry(BaseField* field) {
     fields_.push_back(field);
@@ -19,16 +21,16 @@ void Table::registry(BaseField* field) {
 void Table::save() {
     auto command = factory_.command();
     for (const auto* f: fields_) {
-        command->set(f);
+        command->set(f->name(), f->value());
     }
     command->execute();
 }
 
 void Table::fetch(const BaseField& condition) {
     auto query = factory_.query();
-    query->where(&condition);
+    query->where(condition.name(), condition.value());
     for (auto* f: fields_) {
-        query->get(f);
+        query->get(f->name(), f->value());
     }
     query->execute();
 }

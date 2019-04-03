@@ -7,6 +7,7 @@ namespace model::db {
 
 class MongoFactory : public Factory {
 public:
+    static Factory& instance();
     QueryPtr query() override;
     CommandPtr command() override;
 };
