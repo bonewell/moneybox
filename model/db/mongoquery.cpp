@@ -20,7 +20,20 @@ void MongoQuery::get(const std::string& name, Variant& value) {
 }
 
 void MongoQuery::execute() {
+//    mongocxx::pool pool{mongocxx::uri{}};
 
+//    auto client = pool.acquire();
+//    auto db = client->database("moneybox");
+//    auto collection = db["main"];
+
+//    bsoncxx::stdx::optional<bsoncxx::document::value> maybe_result =
+//            collection.find_one(bsoncxx::builder::stream::document{} << "id" << id << bsoncxx::builder::stream::finalize);
+//    if (maybe_result) {
+//        auto view = maybe_result->view();
+//        this->id = view["id"].get_int32();
+//        this->amount = view["amount"].get_int64();
+//        this->desc = view["desc"].get_utf8().value.to_string();
+//    }
 }
 
 }  // namespace model::db

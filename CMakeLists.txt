@@ -11,7 +11,6 @@ add_executable(${PROJECT_NAME}
     "model/db/mongofactory.cpp"
     "model/db/mongoquery.cpp"
     "model/field.cpp"
-    "model/item.cpp"
     "model/table.cpp"
 )
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)
