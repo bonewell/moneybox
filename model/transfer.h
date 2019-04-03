@@ -2,12 +2,13 @@
 #define MODEL_TRANSFER_H
 
 #include "field.h"
-#include "table.h"
+#include "entity.h"
 
 namespace model {
 
-class Transfer : public Table {
+class Transfer : public Entity {
 public:
+    Transfer() : Entity("transfer") {}
     Integer id{"id", this};
     Integer sender{"sender", this};
     Integer recipient{"recipient", this};

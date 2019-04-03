@@ -9,6 +9,7 @@ namespace model::db {
 
 class Query {
 public:
+    virtual void entity(const std::string& name) = 0;
     virtual void where(const std::string& name, const Variant& condition) = 0;
     virtual void get(const std::string& name, Variant& value) = 0;
     virtual void execute() = 0;

@@ -2,12 +2,13 @@
 #define MODEL_USER_H
 
 #include "field.h"
-#include "table.h"
+#include "entity.h"
 
 namespace model {
 
-class User : public Table {
+class User : public Entity {
 public:
+    User() : Entity("user") {}
     Integer id{"id", this};
     Text name{"name", this};
     LongLong amount{"amount", this};

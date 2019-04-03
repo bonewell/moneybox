@@ -1,38 +1,36 @@
-#include "table.h"
+#include "entity.h"
 
 #include "db/command.h"
 #include "db/factory.h"
+#include "db/mongofactory.h"
 #include "db/query.h"
 #include "field.h"
 
-#include <iostream>
-#include <variant>
-
-#include "db/mongofactory.h"
-
 namespace model {
 
-db::Factory& Table::factory_ = db::MongoFactory::instance();
+db::Factory& Entity::factory_ = db::MongoFactory::instance();
 
-void Table::registry(BaseField* field) {
+void Entity::registry(BaseField* field) {
     fields_.push_back(field);
 }
 
-void Table::save() {
+void Entity::save() {
     auto command = factory_.command();
+    command->entity(name_);
     for (const auto* f: fields_) {
         command->set(f->name(), f->value());
     }
     command->execute();
 }
 
-void Table::fetch(const BaseField& condition) {
+void Entity::fetch(const BaseField& condition) {
     auto query = factory_.query();
+    query->entity(name_);
     query->where(condition.name(), condition.value());
+    query->execute();
     for (auto* f: fields_) {
         query->get(f->name(), f->value());
     }
-    query->execute();
 }
 
 }  // namespace model

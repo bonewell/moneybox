@@ -7,7 +7,8 @@ namespace model::db {
 
 class MongoCommand : public Command {
 public:
-    MongoCommand();
+    using Command::Command;
+    void entity(const std::string& name) override;
     void set(const std::string& name, const Variant& value) override;
     void execute() override;
 };

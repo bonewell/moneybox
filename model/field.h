@@ -7,11 +7,11 @@
 
 namespace model {
 
-class Table;
+class Entity;
 
 class BaseField {
 public:
-    BaseField(const std::string& name, Table* table);
+    BaseField(const std::string& name, Entity* entity);
     virtual ~BaseField() = default;
     const std::string& name() const;
     const db::Variant& value() const;
@@ -29,7 +29,7 @@ protected:
 
 private:
     const std::string name_;
-    Table* table_;
+    Entity* entity_;
     db::Variant value_;
 };
 
@@ -37,7 +37,7 @@ template<typename T>
 class Field : public BaseField {
 public:
     using type_value = T;
-    Field(const std::string& name, Table* table)
+    Field(const std::string& name, Entity* table)
         : BaseField (name, table) {
         set(type_value{});
     }

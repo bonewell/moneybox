@@ -1,12 +1,12 @@
 #include "field.h"
 
-#include "table.h"
+#include "entity.h"
 
 namespace model {
 
-BaseField::BaseField(const std::string& name, Table* table)
-    : name_{name}, table_{table} {
-    table_->registry(this);
+BaseField::BaseField(const std::string& name, Entity* entity)
+    : name_{name}, entity_{entity} {
+    entity_->registry(this);
 }
 
 const std::string& BaseField::name() const {

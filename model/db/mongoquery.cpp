@@ -2,7 +2,7 @@
 
 namespace model::db {
 
-MongoQuery::MongoQuery() {
+void MongoQuery::entity(const std::string &name) {
 
 }
 

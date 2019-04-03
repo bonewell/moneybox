@@ -7,7 +7,8 @@ namespace model::db {
 
 class MongoQuery : public Query {
 public:
-    MongoQuery();
+    using Query::Query;
+    void entity(const std::string& name) override;
     void where(const std::string& name, const Variant& condition) override;
     void get(const std::string& name, Variant& value) override;
     void execute() override;

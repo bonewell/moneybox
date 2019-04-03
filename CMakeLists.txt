@@ -10,8 +10,8 @@ add_executable(${PROJECT_NAME}
     "model/db/mongocommand.cpp"
     "model/db/mongofactory.cpp"
     "model/db/mongoquery.cpp"
+    "model/entity.cpp"
     "model/field.cpp"
-    "model/table.cpp"
 )
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)
 target_link_libraries(${PROJECT_NAME}
