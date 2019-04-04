@@ -1,5 +1,10 @@
+# Prepare
+## Install mongoDB 4.0
+[docs.mongodb.com/manual](https://docs.mongodb.com/manual/administration/install-community/)
+
 # Build
 ```Shell
+conan remote add public-conan https://api.bintray.com/conan/bincrafters/public-conan True
 mkdir build
 cd build
 conan install ..
