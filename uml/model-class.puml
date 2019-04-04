@@ -1,33 +1,44 @@
 @startuml
 hide empty members
 namespace model {
-    class Variant {
-        int
-        string
-        long long
+    namespace db {
+        interface Factory
+        interface Query
+        interface Command
     }
-    abstract class Table {
+    abstract class Entity {
         - fields : BaseFieldList
+        # factory : db.Factory
+        - registry(field : BaseField)
+        + Entity(name : string)
         + save()
-        + fetch(field: BaseField)
-        + {static} load() : TableList
+        + fetch(field : BaseField)
     }
     abstract class BaseField {
         - name : string
         - value : Variant
-        - table : Table
-        + set(value : Variant)
-        + get() : Variant
-        + load()
+        - entity : Entity
+        # set<T>(value : T)
+        # get<T>() : T
+        + BaseField(name : string, entity : Entity)
+        + name() : string
+        + value() : Variant
     }
-    class Field << template >> {
+    class Field<T> << template>> {
+        - name() : string
+        - value() : Variant
+        + Field(name : string, entity : Entity)
+        + operator=<T>(value : T)
+        + operator<T>() : T
     }
     class User {
+        + User()
         + id : Int
         + name : Text
         + amount : LongLong
     }
     class Transfer {
+        + Transfer()
         + id : Int
         + sender : Int
         + recipient : Int
@@ -35,15 +46,16 @@ namespace model {
         + description : Text
     }
 
-    BaseField .> Variant
     BaseField <|-- Field
     Field <|-- Int
     Field <|-- Text
     Field <|-- LongLong
-    Table "1" .o BaseField
-    Table o. "*" BaseField
-    Table <|-- User
-    Table <|-- Transfer
-    Transfer o. "2" User
+    model.db.Factory <.. Entity
+    model.db.Query <.. Entity
+    model.db.Command <.. Entity
+    Entity "1" .o BaseField
+    Entity o. "*" BaseField
+    Entity <|-- User
+    Entity <|-- Transfer
 }
 @enduml

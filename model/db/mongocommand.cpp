@@ -18,6 +18,8 @@ void MongoCommand::set(const std::string& name, const Variant& value) {
 }
 
 void MongoCommand::execute() {
+    // it does not check a document exists in collection
+    // just save new
     auto collection = db_[entity_];
     bsoncxx::document::value document = builder_
             << bsoncxx::builder::stream::finalize;

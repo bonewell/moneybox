@@ -1,26 +1,36 @@
 @startuml
 hide empty members
 namespace model.db {
+    class Variant {
+        int32_t
+        int64_t
+        string
+    }
     interface Query {
-        + where(condition)
+        + entity(name : string)
+        + where(name : string, condition : Variant)
         + execute()
-        + get(name : string, value [out])
+        + get(name : string, [out] value : Variant)
     }
     interface Factory {
         + query() : Query
         + command() : Command
     }
     interface Command {
-        + set(name : string, value)
+        + entity(name : string)
+        + set(name : string, value : Variant)
         + execute()
     }
     class MongoQuery
-    class MongoFactory
+    class MongoFactory {
+        + {static} instance() : Factory
+    }
     class MongoCommand
 
 
     Query <|.. MongoQuery
     Factory <|.. MongoFactory
+    MongoFactory -* MongoFactory
     Command <|.. MongoCommand
     MongoQuery <. MongoFactory : create
     MongoFactory .> MongoCommand : create

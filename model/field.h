@@ -39,7 +39,7 @@ public:
     using type_value = T;
     Field(const std::string& name, Entity* table)
         : BaseField (name, table) {
-        set(type_value{});
+        set(type_value{});  // to keep type
     }
     Field& operator=(type_value value) {
         set(value);
