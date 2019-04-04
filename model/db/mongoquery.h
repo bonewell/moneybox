@@ -1,7 +1,10 @@
 #ifndef MODEL_DB_MONGOQUERY_H
 #define MODEL_DB_MONGOQUERY_H
 
+#include <string>
+
 #include <mongocxx/database.hpp>
+#include <bsoncxx/builder/stream/document.hpp>
 
 #include "query.h"
 
@@ -16,6 +19,9 @@ public:
     bool execute() override;
 private:
     mongocxx::database db_;
+    std::string entity_;
+    bsoncxx::builder::stream::document condition_;
+    bsoncxx::stdx::optional<bsoncxx::document::value> result_;
 };
 
 }  // namespace model::db

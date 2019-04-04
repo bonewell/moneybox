@@ -1,6 +1,8 @@
 #ifndef MODEL_DB_MONGOCOMMAND_H
 #define MODEL_DB_MONGOCOMMAND_H
 
+#include <string>
+
 #include <mongocxx/database.hpp>
 #include <bsoncxx/builder/stream/document.hpp>
 

@@ -53,8 +53,8 @@ private:
     using BaseField::value;
 };
 
-using Integer = Field<int>;
-using LongLong = Field<long long>;
+using Integer = Field<int32_t>;
+using LongLong = Field<int64_t>;
 using Text = Field<std::string>;
 
 }  // namespace model

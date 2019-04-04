@@ -3,39 +3,39 @@
 namespace model::db {
 
 void MongoQuery::entity(const std::string &name) {
-
+    entity_ = name;
 }
 
 void MongoQuery::where(const std::string& name, const Variant& value) {
-
+    std::visit([&](auto&& arg) {
+        using type = std::decay_t<decltype(arg)>;
+        if (std::holds_alternative<type>(value)) {
+            condition_ << name << std::get<type>(value)
+                       << bsoncxx::builder::stream::finalize;
+        }
+    }, value);
 }
 
 void MongoQuery::get(const std::string& name, Variant& value) {
-//    std::visit([f](auto&& arg) {
-//        using type = std::decay_t<decltype (arg)>;
-//        if (std::holds_alternative<type>(f->value())) {
-////                f->set<type>();
-//        }
-//    }, f->value());
+    auto field = result_->view()[name];
+    std::visit([&](auto&& arg) {
+        using type = std::decay_t<decltype (arg)>;
+        if (std::holds_alternative<type>(value)) {
+            if (std::is_same_v<type, int32_t>) {
+                value = field.get_int32();
+            } else if (std::is_same_v<type, int64_t>) {
+                value = field.get_int64();
+            } else if (std::is_same_v<type, std::string>) {
+                value = field.get_utf8().value.to_string();
+            }
+        }
+    }, value);
 }
 
 bool MongoQuery::execute() {
-//    mongocxx::pool pool{mongocxx::uri{}};
-
-//    auto client = pool.acquire();
-//    auto db = client->database("moneybox");
-//    auto collection = db["main"];
-
-//    bsoncxx::stdx::optional<bsoncxx::document::value> maybe_result =
-//            collection.find_one(bsoncxx::builder::stream::document{} << "id" << id << bsoncxx::builder::stream::finalize);
-//    if (maybe_result) {
-//        auto view = maybe_result->view();
-//        this->id = view["id"].get_int32();
-//        this->amount = view["amount"].get_int64();
-//        this->desc = view["desc"].get_utf8().value.to_string();
-//    }
-//        std::get_if<T>(&f->value());
-    return false;
+    auto collection = db_[entity_];
+    result_ = collection.find_one(condition_.view());
+    return bool{result_};
 }
 
 }  // namespace model::db
