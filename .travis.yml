@@ -1,0 +1,13 @@
+os: osx
+osx_image: xcode10.2
+language: cpp
+compiler:
+  - clang
+install:
+ - pip install conan
+ - conan user
+script:
+ - conan remote add public-conan https://api.bintray.com/conan/bincrafters/public-conan True
+ - conan install .
+ - cmake .
+ - cmake --build .
