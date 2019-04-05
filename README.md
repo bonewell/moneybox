@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/bonewell/moneybox.svg?branch=develop)](https://travis-ci.org/bonewell/moneybox)
+
 # Prepare
 ## Install mongoDB 4.0
 [docs.mongodb.com/manual](https://docs.mongodb.com/manual/administration/install-community/)
