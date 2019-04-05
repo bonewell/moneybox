@@ -9,4 +9,4 @@ script:
  - conan remote add public-conan https://api.bintray.com/conan/bincrafters/public-conan True
  - conan install .
  - cmake .
- - cmake --build
+ - cmake --build .
