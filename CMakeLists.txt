@@ -22,3 +22,19 @@ target_link_libraries(${PROJECT_NAME}
 target_include_directories(${PROJECT_NAME} PRIVATE
     ${CMAKE_SOURCE_DIR}
 )
+
+enable_testing()
+set(AUTO_TEST ${PROJECT_NAME}_autotest)
+add_executable(${AUTO_TEST}
+    "model/db/mongoquery.cpp"
+    "model/db/mongoquery_test.cpp"
+)
+target_compile_features(${AUTO_TEST} PRIVATE cxx_std_17)
+target_include_directories(${AUTO_TEST} PRIVATE
+    ${CMAKE_SOURCE_DIR}
+)
+target_link_libraries(${AUTO_TEST}
+    CONAN_PKG::gtest
+    CONAN_PKG::mongo-cxx-driver
+)
+add_test(NAME ${AUTO_TEST} COMMAND ${AUTO_TEST})
