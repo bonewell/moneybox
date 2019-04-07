@@ -26,6 +26,8 @@ target_include_directories(${PROJECT_NAME} PRIVATE
 enable_testing()
 set(AUTO_TEST ${PROJECT_NAME}_autotest)
 add_executable(${AUTO_TEST}
+    "model/db/mongocommand.cpp"
+    "model/db/mongocommand_test.cpp"
     "model/db/mongoquery.cpp"
     "model/db/mongoquery_test.cpp"
 )
