@@ -24,6 +24,25 @@ target_include_directories(${PROJECT_NAME} PRIVATE
 )
 
 enable_testing()
+set(UNIT_TEST ${PROJECT_NAME}_unittest)
+add_executable(${UNIT_TEST}
+    "model/field.cpp"
+    "model/db/mongocommand.cpp"
+    "model/db/mongofactory.cpp"
+    "model/db/mongoquery.cpp"
+    "model/entity.cpp"
+    "model/entity_test.cpp"
+)
+target_compile_features(${UNIT_TEST} PRIVATE cxx_std_17)
+target_include_directories(${UNIT_TEST} PRIVATE
+    ${CMAKE_SOURCE_DIR}
+)
+target_link_libraries(${UNIT_TEST}
+    CONAN_PKG::gtest
+    CONAN_PKG::mongo-cxx-driver
+)
+add_test(NAME ${UNIT_TEST} COMMAND ${UNIT_TEST})
+
 set(AUTO_TEST ${PROJECT_NAME}_autotest)
 add_executable(${AUTO_TEST}
     "model/db/mongocommand.cpp"
