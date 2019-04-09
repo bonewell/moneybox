@@ -19,7 +19,8 @@ public:
     mongocxx::pool pool{mongocxx::uri{}};
     mongocxx::database db;
     void SetUp() override {
-        db = pool.acquire()->database("moneybox_test");
+        auto client = pool.acquire();
+        db = client->database("moneybox_test");
         auto collection = db["user_test"];
         auto builder = bsoncxx::builder::stream::document{};
         bsoncxx::document::value document = builder
@@ -31,7 +32,8 @@ public:
         collection.insert_one(std::move(document));
     }
     void TearDown() override {
-        pool.acquire()->database("moneybox_test").drop();
+        auto client = pool.acquire();
+        client->database("moneybox_test").drop();
     }
 };
 

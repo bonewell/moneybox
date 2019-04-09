@@ -13,7 +13,8 @@ namespace {
 static mongocxx::instance instance;
 static mongocxx::database db() {
     static mongocxx::pool pool{mongocxx::uri{}};
-    return pool.acquire()->database("moneybox");
+    auto client = pool.acquire();
+    return client->database("moneybox");
 }
 }  // namespace
 

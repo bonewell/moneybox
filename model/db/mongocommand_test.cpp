@@ -16,10 +16,12 @@ class MongoCommandTest : public Test {
 public:
     mongocxx::pool pool{mongocxx::uri{}};
     mongocxx::database db() {
-        return pool.acquire()->database("moneybox_test");
+        auto client = pool.acquire();
+        return client->database("moneybox_test");
     }
     void TearDown() override {
-        pool.acquire()->database("moneybox_test").drop();
+        auto client = pool.acquire();
+        client->database("moneybox_test").drop();
     }
 };
 
