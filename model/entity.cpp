@@ -8,14 +8,14 @@
 
 namespace model {
 
-db::Factory& Entity::factory_ = db::MongoFactory::instance();
+db::Factory* Entity::factory_ = &db::MongoFactory::instance();
 
 void Entity::registry(BaseField* field) {
     fields_.push_back(field);
 }
 
 void Entity::save() {
-    auto command = factory_.command();
+    auto command = factory_->command();
     command->entity(name_);
     for (const auto* f: fields_) {
         command->set(f->name(), f->value());
@@ -24,7 +24,7 @@ void Entity::save() {
 }
 
 bool Entity::fetch(const BaseField& condition) {
-    auto query = factory_.query();
+    auto query = factory_->query();
     query->entity(name_);
     query->where(condition.name(), condition.value());
     if (!query->execute()) return false;

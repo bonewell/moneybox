@@ -13,9 +13,16 @@ matrix:
               - cmake .
               - cmake --build .
               - ctest
+          addons:
+              homebrew:
+                  packages:
+                      - mongodb
+          before_install:
+              - brew services start mongodb
         - os: linux
           dist: xenial
           compiler: gcc
+          services: mongodb
           addons:
               apt:
                   sources:

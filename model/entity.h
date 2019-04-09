@@ -18,9 +18,9 @@ public:
     void save();
     bool fetch(const BaseField& condition);
 protected:
-    static db::Factory& factory_;
-private:
+    static db::Factory* factory_;
     void registry(BaseField* field);
+private:
     std::string name_;
     std::vector<BaseField*> fields_;
 
