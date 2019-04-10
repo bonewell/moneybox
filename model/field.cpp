@@ -4,9 +4,9 @@
 
 namespace model {
 
-BaseField::BaseField(const std::string& name, Entity* entity)
+BaseField::BaseField(std::string_view name, gsl::not_null<Entity*> entity)
     : name_{name}, entity_{entity} {
-    entity_->registry(this);
+    entity_->registry(gsl::make_not_null(this));
 }
 
 const std::string& BaseField::name() const {

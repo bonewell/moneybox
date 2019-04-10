@@ -21,7 +21,7 @@ class EntityTest : public Test {
 public:
     void SetUp() override {
         factory = new NiceMock<MockFactory>{};
-        TestingEntity::factory_ = factory;
+        TestingEntity::factory_ = gsl::make_not_null(factory);
         entity = TestingEntity{"test"};
     }
     void TearDown() override {

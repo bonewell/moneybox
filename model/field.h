@@ -2,6 +2,9 @@
 #define MODEL_FIELD_H
 
 #include <string>
+#include <string_view>
+
+#include <gsl/gsl>
 
 #include "db/variant.h"
 
@@ -11,7 +14,7 @@ class Entity;
 
 class BaseField {
 public:
-    BaseField(const std::string& name, Entity* entity);
+    BaseField(std::string_view name, gsl::not_null<Entity*> entity);
     virtual ~BaseField() = default;
     const std::string& name() const;
     const db::Variant& value() const;
@@ -29,7 +32,7 @@ protected:
 
 private:
     const std::string name_;
-    Entity* entity_;
+    gsl::not_null<Entity*> entity_;
     db::Variant value_;
 };
 
@@ -37,8 +40,8 @@ template<typename T>
 class Field : public BaseField {
 public:
     using type_value = T;
-    Field(const std::string& name, Entity* table)
-        : BaseField (name, table) {
+    Field(std::string_view name, Entity* table)
+        : BaseField (name, gsl::make_not_null(table)) {
         set(type_value{});  // to keep type
     }
     Field& operator=(type_value value) {

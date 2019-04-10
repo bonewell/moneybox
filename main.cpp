@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string_view>
 
 #include <boost/asio.hpp>
 #include <gsl/gsl>
@@ -16,6 +17,8 @@ int main()
 {
     cout << "Hello World!" << endl;
     get(new int{});
+
+    auto s = "sdaf"sv;
 
     model::User u;
     u.id = 3;

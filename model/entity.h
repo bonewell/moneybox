@@ -2,7 +2,10 @@
 #define MODEL_ENTITY_H
 
 #include <string>
+#include <string_view>
 #include <vector>
+
+#include <gsl/gsl>
 
 namespace model {
 
@@ -14,15 +17,15 @@ class BaseField;
 
 class Entity {
 public:
-    explicit Entity(const std::string& name) : name_{name} {}
+    explicit Entity(std::string_view name) : name_{name} {}
     void save();
     bool fetch(const BaseField& condition);
 protected:
-    static db::Factory* factory_;
-    void registry(BaseField* field);
+    static gsl::not_null<db::Factory*> factory_;
+    void registry(gsl::not_null<BaseField*> field);
 private:
     std::string name_;
-    std::vector<BaseField*> fields_;
+    std::vector<gsl::not_null<BaseField*>> fields_;
 
     friend class BaseField;
 };

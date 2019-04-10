@@ -4,7 +4,7 @@
 
 namespace model::db {
 
-void MongoCommand::entity(const std::string &name) {
+void MongoCommand::entity(const std::string& name) {
     entity_ = name;
 }
 
