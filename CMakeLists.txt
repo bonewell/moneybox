@@ -13,6 +13,7 @@ add_executable(${PROJECT_NAME}
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)
 target_link_libraries(${PROJECT_NAME}
     ${PROJECT_NAME}::model
+    ${PROJECT_NAME}::view
     CONAN_PKG::boost
     CONAN_PKG::gsl_microsoft
     CONAN_PKG::mongo-cxx-driver
@@ -23,4 +24,5 @@ target_include_directories(${PROJECT_NAME} PRIVATE
 
 enable_testing()
 add_subdirectory(model)
+add_subdirectory(view)
 
