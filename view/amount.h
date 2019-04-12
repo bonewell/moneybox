@@ -9,5 +9,7 @@ struct Amount : public View {
     long long amount;
     json::json render() override;
 };
+
 }  // namespace view
+
 #endif // VIEW_AMOUNT_H
