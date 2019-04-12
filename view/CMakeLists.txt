@@ -3,6 +3,7 @@ set(COMPONENT_NAME ${PROJECT_NAME}_${NAME})
 
 add_library(${COMPONENT_NAME}
     "amount.cpp"
+    "transfer.cpp"
     "transfersend.cpp"
 )
 add_library(${PROJECT_NAME}::${NAME} ALIAS ${COMPONENT_NAME})
@@ -18,6 +19,7 @@ target_include_directories(${COMPONENT_NAME} PRIVATE
 set(UNIT_TEST ${COMPONENT_NAME}_unittest)
 add_executable(${UNIT_TEST}
     "amount_test.cpp"
+    "transfer_test.cpp"
     "transfersend_test.cpp"
 )
 target_compile_features(${UNIT_TEST} PRIVATE cxx_std_17)
