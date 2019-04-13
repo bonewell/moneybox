@@ -16,11 +16,11 @@ json::json TransferSend::execute(const json::json &input) {
         transfer.recipient = recipient.name;
         transfer.amount = input["amount"];
         transfer.description = input["description"];
-        view.result = transfer.save();
+        view_.result = transfer.save();
     } else {
-        view.result = false;
+        view_.result = false;
     }
-    return view.render();
+    return view_.render();
 }
 
 }  // namespace controller

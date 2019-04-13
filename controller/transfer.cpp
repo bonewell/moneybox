@@ -11,7 +11,7 @@ json::json Transfer::execute(const json::json &input) {
         outcoming(user);
         incoming(user);
     }
-    return view.render();
+    return view_.render();
 }
 
 void Transfer::outcoming(const model::User& user) {
@@ -35,7 +35,7 @@ void Transfer::incoming(const model::User& user) {
 }
 
 void Transfer::append(const model::Transfer& transfer) {
-    view.transfers.push_back({transfer.sender,
+    view_.transfers.push_back({transfer.sender,
                               transfer.recipient,
                               transfer.amount,
                               transfer.description});

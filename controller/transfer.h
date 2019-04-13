@@ -19,7 +19,7 @@ private:
     void outcoming(const model::User& user);
     void incoming(const model::User& user);
     void append(const model::Transfer& transfer);
-    view::Transfer view;
+    view::Transfer view_;
 };
 
 }  // namespace controller

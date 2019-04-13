@@ -11,7 +11,7 @@ public:
     json::json execute(const json::json& input) override;
 
 private:
-    view::TransferSend view;
+    view::TransferSend view_;
 };
 
 }  // namespace controller
