@@ -8,10 +8,10 @@
 namespace model {
 
 class MockCommand : public db::Command {
- public:
+public:
   MOCK_METHOD1(entity, void(const std::string& name));
   MOCK_METHOD2(set, void(const std::string& name, const db::Variant& value));
-  MOCK_METHOD0(execute, void());
+  MOCK_METHOD0(execute, bool());
 };
 
 }  // namespace model

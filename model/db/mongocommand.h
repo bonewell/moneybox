@@ -15,7 +15,8 @@ public:
     explicit MongoCommand(mongocxx::database&& db) : db_{std::move(db)} {}
     void entity(const std::string& name) override;
     void set(const std::string& name, const Variant& value) override;
-    void execute() override;
+    bool execute() override;
+
 private:
     mongocxx::database db_;
     std::string entity_;

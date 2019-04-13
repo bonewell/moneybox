@@ -14,24 +14,31 @@ void Entity::registry(gsl::not_null<BaseField*> field) {
     fields_.push_back(field);
 }
 
-void Entity::save() {
+bool Entity::save() {
     auto command = factory_->command();
     command->entity(name_);
     for (const auto& f: fields_) {
         command->set(f->name(), f->value());
     }
-    command->execute();
+    return command->execute();
 }
 
 bool Entity::fetch(const BaseField& condition) {
-    auto query = factory_->query();
-    query->entity(name_);
-    query->where(condition.name(), condition.value());
-    if (!query->execute()) return false;
-    for (auto& f: fields_) {
-        query->get(f->name(), f->value());
+    query_ = factory_->query();
+    query_->entity(name_);
+    query_->where(condition.name(), condition.value());
+    if (!query_->execute()) return false;
+    return next();
+}
+
+bool Entity::next() {
+    if (query_->next()) {
+        for (auto& f: fields_) {
+            query_->get(f->name(), f->value());
+        }
+        return true;
     }
-    return true;
+    return false;
 }
 
 }  // namespace model

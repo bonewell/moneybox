@@ -9,7 +9,6 @@
 namespace view {
 
 struct TransferData {
-    int id;
     std::string sender;
     std::string recipient;
     long long amount;

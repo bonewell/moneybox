@@ -7,25 +7,27 @@
 
 #include <gsl/gsl>
 
-namespace model {
+#include "db/factory.h"
 
-namespace db {
-class Factory;
-}  // namespace db
+namespace model {
 
 class BaseField;
 
 class Entity {
 public:
     explicit Entity(std::string_view name) : name_{name} {}
-    void save();
+    bool save();
     bool fetch(const BaseField& condition);
+    bool next();
+
 protected:
     static gsl::not_null<db::Factory*> factory_;
     void registry(gsl::not_null<BaseField*> field);
+
 private:
     std::string name_;
     std::vector<gsl::not_null<BaseField*>> fields_;
+    db::QueryPtr query_;
 
     friend class BaseField;
 };

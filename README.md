@@ -45,8 +45,6 @@ out:
 ```json
 [
     {
-    
-        "id": <number>,
         "sender": <string>,
         "recipient": <string>,
         "amount": <number>,

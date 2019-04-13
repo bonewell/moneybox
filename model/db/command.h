@@ -11,7 +11,7 @@ class Command {
 public:
     virtual void entity(const std::string& name) = 0;
     virtual void set(const std::string& name, const Variant& value) = 0;
-    virtual void execute() = 0;
+    virtual bool execute() = 0;
     virtual ~Command() = default;
 };
 

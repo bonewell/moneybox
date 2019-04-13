@@ -11,8 +11,9 @@ namespace model {
         # factory : db.Factory
         - registry(field : BaseField)
         + Entity(name : string)
-        + save()
-        + fetch(field : BaseField)
+        + save() : bool
+        + fetch(field : BaseField) : bool
+        + next() : bool
     }
     abstract class BaseField {
         - name : string
