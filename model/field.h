@@ -51,6 +51,11 @@ public:
     operator type_value() const {
         return get<type_value>();
     }
+    Field& operator=(const Field& other) {
+        set(static_cast<type_value>(other));
+        return *this;
+    }
+
 private:
     using BaseField::name;
     using BaseField::value;

@@ -112,6 +112,7 @@ TEST_F(EntityTest, GetFieldOfDocument) {
     ON_CALL(*factory, query())
             .WillByDefault(Return(ByMove(db::QueryPtr{query})));
     ON_CALL(*query, execute()).WillByDefault(Return(true));
+    ON_CALL(*query, next()).WillByDefault(Return(true));
 
     db::Variant value = int32_t{3};
     EXPECT_CALL(*query, get("id", _)).WillOnce(SetArgReferee<1>(value));

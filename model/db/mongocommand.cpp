@@ -1,5 +1,7 @@
 #include "mongocommand.h"
 
+#include <mongocxx/exception/bulk_write_exception.hpp>
+
 #include "model/field.h"
 
 namespace model::db {
@@ -17,13 +19,18 @@ void MongoCommand::set(const std::string& name, const Variant& value) {
     }, value);
 }
 
-void MongoCommand::execute() {
+bool MongoCommand::execute() {
     // it does not check a document exists in collection
     // just save new
     auto collection = db_[entity_];
     bsoncxx::document::value document = builder_
             << bsoncxx::builder::stream::finalize;
-    collection.insert_one(std::move(document));
+    try {
+        collection.insert_one(std::move(document));
+        return true;
+    } catch(const mongocxx::bulk_write_exception&) {
+        return false;
+    }
 }
 
 }  // namespace model::db

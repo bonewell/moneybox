@@ -12,6 +12,7 @@ public:
     virtual json::json render() = 0;
     virtual ~View() = default;
 };
+
 }  // namespace view
 
 #endif // VIEW_VIEW_H

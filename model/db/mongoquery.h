@@ -12,16 +12,20 @@ namespace model::db {
 
 class MongoQuery : public Query {
 public:
-    explicit MongoQuery(mongocxx::database&& db) : db_{std::move(db)} {}
+    explicit MongoQuery(mongocxx::database&& db);
     void entity(const std::string& name) override;
     void where(const std::string& name, const Variant& condition) override;
     void get(const std::string& name, Variant& value) override;
     bool execute() override;
+    bool next() override;
+
 private:
     mongocxx::database db_;
     std::string entity_;
     bsoncxx::builder::stream::document condition_;
-    bsoncxx::stdx::optional<bsoncxx::document::value> result_;
+    mongocxx::cursor cursor_;
+    mongocxx::cursor::iterator current_;
+    bsoncxx::document::view document_;
 };
 
 }  // namespace model::db

@@ -11,6 +11,7 @@ public:
     QueryPtr query() override;
     CommandPtr command() override;
 };
+
 }  // namespace mongo::db
 
 #endif // MODEL_DB_MONGOFACTORY_H

@@ -13,6 +13,7 @@ public:
     virtual void where(const std::string& name, const Variant& condition) = 0;
     virtual void get(const std::string& name, Variant& value) = 0;
     virtual bool execute() = 0;
+    virtual bool next() = 0;
     virtual ~Query() = default;
 };
 

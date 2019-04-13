@@ -9,7 +9,6 @@ namespace model {
 class User : public Entity {
 public:
     User() : Entity("user") {}
-    Integer id{"id", this};
     Text name{"name", this};
     LongLong amount{"amount", this};
 };

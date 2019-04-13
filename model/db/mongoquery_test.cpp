@@ -49,6 +49,7 @@ TEST_F(MongoQueryTest, GetInt32) {
     query.entity("user_test");
     query.where("name", "Bone");
     query.execute();
+    query.next();
     Variant i32 = int32_t{};
     query.get("i32", i32);
     EXPECT_THAT(std::get<int32_t>(i32), Eq(3));
@@ -59,6 +60,7 @@ TEST_F(MongoQueryTest, GetInt64) {
     query.entity("user_test");
     query.where("name", "Bone");
     query.execute();
+    query.next();
     Variant i64 = int64_t{};
     query.get("i64", i64);
     EXPECT_THAT(std::get<int64_t>(i64), Eq(5'000'000'000));
@@ -69,6 +71,7 @@ TEST_F(MongoQueryTest, GetString) {
     query.entity("user_test");
     query.where("name", "Bone");
     query.execute();
+    query.next();
     Variant ss433 = std::string{};
     query.get("ss433", ss433);
     EXPECT_THAT(std::get<std::string>(ss433), Eq("Text"));
