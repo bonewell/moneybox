@@ -1,27 +1,11 @@
 #include <iostream>
 
-#include <boost/asio.hpp>
-#include <gsl/gsl>
-#include <nlohmann/json.hpp>
-
 #include "api/moneybox.h"
-#include "api/rpc.h"
-
-#include "controller/factory.h"
-#include "controller/controller.h"
+#include "http/handler.h"
 #include "model/user.h"
-
-using namespace std;
-
-void get(gsl::owner<int*> x) {
-    *x = 4;
-}
 
 int main()
 {
-    cout << "Hello World!" << endl;
-    get(new int{});
-
     model::User recipient;
     recipient.name = "Nate";
     recipient.amount = 999;
@@ -33,32 +17,37 @@ int main()
     user.save();
 
     api::MoneyBox box;
-    controller::Factory factory;
-    auto amount = factory.create("/amount");
-    auto res_a = amount->execute({{"user", "Bone"}});
-    std::cout << res_a << "\n";
+    http::Handler h1;
+    h1.name("/amount");
+    h1.request(R"({"user": "Bone"})");
+    box.execute(h1);
+    std::cout << h1.response() << "\n";
 
-    auto transfer_send = factory.create("/transfer/send");
-    auto res_ts = transfer_send->execute({
-        {"user", "Bone"},
-        {"recipient", "Nate"},
-        {"amount", 333},
-        {"description", "present for you"}
-    });
-    std::cout << res_ts << "\n";
+    http::Handler h2;
+    h2.name("/transfer/send");
+    h2.request(R"({"user": "Bone",
+                   "recipient": "Nate",
+                   "amount": 333,
+                   "description": "present for you"
+                })");
+    box.execute(h2);
+    std::cout << h2.response() << "\n";
 
-    auto transfer_send2 = factory.create("/transfer/send");
-    auto res_ts2 = transfer_send2->execute({
-        {"user", "Nate"},
-        {"recipient", "Bone"},
-        {"amount", 555},
-        {"description", "take back"}
-    });
-    std::cout << res_ts2 << "\n";
+    http::Handler h3;
+    h3.name("/transfer/send");
+    h3.request(R"({"user": "Nate",
+                   "recipient": "Bone",
+                   "amount": 555,
+                   "description": "take back"
+                })");
+    box.execute(h3);
+    std::cout << h3.response() << "\n";
 
-    auto transfer = factory.create("/transfer");
-    auto res = transfer->execute({{"user", "Bone"}});
-    std::cout << res << "\n";
+    http::Handler h4;
+    h4.name("/transfer");
+    h4.request(R"({"user": "Bone"})");
+    box.execute(h4);
+    std::cout << h4.response() << "\n";
 
     return 0;
 }

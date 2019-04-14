@@ -16,6 +16,7 @@ target_link_libraries(${PROJECT_NAME}
     ${PROJECT_NAME}::view
     ${PROJECT_NAME}::controller
     ${PROJECT_NAME}::api
+    ${PROJECT_NAME}::http
     CONAN_PKG::jsonformoderncpp
     CONAN_PKG::boost
     CONAN_PKG::gsl_microsoft
@@ -30,4 +31,5 @@ add_subdirectory(model)
 add_subdirectory(view)
 add_subdirectory(controller)
 add_subdirectory(api)
+add_subdirectory(http)
 
