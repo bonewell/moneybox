@@ -10,7 +10,6 @@ namespace view {
         + result : bool
     }
     class TransferData {
-        + id : integer
         + sender : string
         + recipient : string
         + amount : integer

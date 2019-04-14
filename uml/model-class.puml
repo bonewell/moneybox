@@ -29,20 +29,19 @@ namespace model {
         - name() : string
         - value() : Variant
         + Field(name : string, entity : Entity)
-        + operator=<T>(value : T)
+        + operator=<T>(value : T) : Field
+        + operator=(other : Field) : Field
         + operator<T>() : T
     }
     class User {
         + User()
-        + id : Int
         + name : Text
         + amount : LongLong
     }
     class Transfer {
         + Transfer()
-        + id : Int
-        + sender : Int
-        + recipient : Int
+        + sender : Text
+        + recipient : Text
         + amount : LongLong
         + description : Text
     }

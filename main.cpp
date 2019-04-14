@@ -4,6 +4,9 @@
 #include <gsl/gsl>
 #include <nlohmann/json.hpp>
 
+#include "api/moneybox.h"
+#include "api/rpc.h"
+
 #include "controller/factory.h"
 #include "controller/controller.h"
 #include "model/user.h"
@@ -29,6 +32,7 @@ int main()
     user.amount = 777;
     user.save();
 
+    api::MoneyBox box;
     controller::Factory factory;
     auto amount = factory.create("/amount");
     auto res_a = amount->execute({{"user", "Bone"}});

@@ -9,7 +9,8 @@ namespace model.db {
     interface Query {
         + entity(name : string)
         + where(name : string, condition : Variant)
-        + execute()
+        + execute() : bool
+        + next() : bool
         + get(name : string, [out] value : Variant)
     }
     interface Factory {
@@ -19,7 +20,7 @@ namespace model.db {
     interface Command {
         + entity(name : string)
         + set(name : string, value : Variant)
-        + execute()
+        + execute() : bool
     }
     class MongoQuery
     class MongoFactory {
