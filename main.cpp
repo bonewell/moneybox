@@ -1,9 +1,5 @@
 #include <iostream>
 
-#include <boost/asio.hpp>
-#include <gsl/gsl>
-#include <nlohmann/json.hpp>
-
 #include "api/moneybox.h"
 #include "api/rpc.h"
 
