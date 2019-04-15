@@ -12,14 +12,13 @@ add_executable(${PROJECT_NAME}
 )
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)
 target_link_libraries(${PROJECT_NAME}
+    ${PROJECT_NAME}::api
+    ${PROJECT_NAME}::controller
+    ${PROJECT_NAME}::http
     ${PROJECT_NAME}::model
     ${PROJECT_NAME}::view
-    ${PROJECT_NAME}::controller
-    ${PROJECT_NAME}::api
-    ${PROJECT_NAME}::http
-    CONAN_PKG::jsonformoderncpp
-    CONAN_PKG::boost
     CONAN_PKG::gsl_microsoft
+    CONAN_PKG::jsonformoderncpp
     CONAN_PKG::mongo-cxx-driver
 )
 target_include_directories(${PROJECT_NAME} PRIVATE
@@ -27,9 +26,9 @@ target_include_directories(${PROJECT_NAME} PRIVATE
 )
 
 enable_testing()
+add_subdirectory(api)
+add_subdirectory(controller)
+add_subdirectory(http)
 add_subdirectory(model)
 add_subdirectory(view)
-add_subdirectory(controller)
-add_subdirectory(api)
-add_subdirectory(http)
 
