@@ -9,7 +9,7 @@ matrix:
               - conan user
           script:
               - conan remote add public-conan https://api.bintray.com/conan/bincrafters/public-conan True
-              - conan install .
+              - conan install . --build missing
               - cmake .
               - cmake --build .
               - ctest
