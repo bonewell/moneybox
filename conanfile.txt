@@ -3,7 +3,7 @@ gsl_microsoft/2.0.0@bincrafters/stable
 gtest/1.8.1@bincrafters/stable
 jsonformoderncpp/3.6.1@vthiery/stable
 mongo-cxx-driver/3.3.0@bincrafters/stable
-restinio/0.4.8@bincrafters/stable
+restinio/0.4.8.6@stiffstream/stable
 
 [generators]
 cmake
