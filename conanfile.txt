@@ -4,6 +4,11 @@ gtest/1.8.1@bincrafters/stable
 jsonformoderncpp/3.6.1@vthiery/stable
 mongo-cxx-driver/3.3.0@bincrafters/stable
 restinio/0.4.8.6@stiffstream/stable
+boost/1.68.0@conan/stable
+
+[options]
+restinio:boost_libs=static
+boost:shared=False
 
 [generators]
 cmake
