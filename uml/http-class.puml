@@ -12,6 +12,7 @@ namespace http {
         + name(text : string)
         + request(text : string)
         + response() : string
+        + error() : int
     }
     class Server {
         - api : Api

@@ -8,8 +8,9 @@ matrix:
               - pip install conan
               - conan user
           script:
+              - conan remote add stiffstream https://api.bintray.com/conan/stiffstream/public True
               - conan remote add public-conan https://api.bintray.com/conan/bincrafters/public-conan True
-              - conan install .
+              - conan install . --build missing
               - cmake .
               - cmake --build .
               - ctest
@@ -35,6 +36,7 @@ matrix:
               - pip install --user conan
               - conan user
           script:
+              - conan remote add stiffstream https://api.bintray.com/conan/stiffstream/public True
               - conan remote add public-conan https://api.bintray.com/conan/bincrafters/public-conan True
               - conan install . -s compiler.libcxx=libstdc++11 --build missing
               - cmake .

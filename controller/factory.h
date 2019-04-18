@@ -12,7 +12,7 @@ using ControllerPtr = std::unique_ptr<Controller>;
 class Factory
 {
 public:
-    ControllerPtr create(std::string_view name);
+    ControllerPtr create(std::string_view name) const;
 };
 
 }  // namespace controller

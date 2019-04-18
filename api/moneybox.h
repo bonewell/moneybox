@@ -8,7 +8,7 @@ namespace api {
 
 class MoneyBox : public Api {
 public:
-    void execute(Rpc& rpc) override;
+    void execute(Rpc& rpc) const override;
 
 private:
     controller::Factory factory_;
