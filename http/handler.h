@@ -18,6 +18,9 @@ public:
     void response(const std::string& response) override {
         response_ = response;
     }
+    void error(int error) override {
+        error_ = error;
+    }
     void name(const std::string& name) {
         name_ = name;
     }
@@ -27,11 +30,15 @@ public:
     const std::string& response() {
         return response_;
     }
+    int error() {
+        return error_;
+    }
 
 private:
     std::string name_;
     std::string request_;
     std::string response_;
+    int error_{200};
 };
 
 }  // namespace http

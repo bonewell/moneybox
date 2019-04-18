@@ -10,6 +10,7 @@ public:
     virtual const std::string& name() = 0;
     virtual const std::string& request() = 0;
     virtual void response(const std::string& response) = 0;
+    virtual void error(int error) = 0;
     virtual ~Rpc() = default;
 };
 

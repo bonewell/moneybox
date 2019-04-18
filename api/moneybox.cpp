@@ -9,11 +9,15 @@ namespace json = nlohmann;
 
 namespace api {
 
-void MoneyBox::execute(Rpc& rpc) {
+void MoneyBox::execute(Rpc& rpc) const {
     auto controller = factory_.create(rpc.name());
-    auto request = json::json::parse(rpc.request());
-    std::string response = controller->execute(request).dump();
-    rpc.response(response);
+    if (controller) {
+        auto request = json::json::parse(rpc.request());
+        std::string response = controller->execute(request).dump();
+        rpc.response(response);
+    } else {
+        rpc.error(404);
+    }
 }
 
 }  // namespace api

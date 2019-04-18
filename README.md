@@ -6,6 +6,7 @@
 
 # Build
 ```Shell
+conan remote add stiffstream https://api.bintray.com/conan/stiffstream/public True
 conan remote add public-conan https://api.bintray.com/conan/bincrafters/public-conan True
 mkdir build
 cd build

@@ -7,7 +7,7 @@ class Rpc;
 
 class Api {
 public:
-    virtual void execute(Rpc& rpc) = 0;
+    virtual void execute(Rpc& rpc) const = 0;
     virtual ~Api() = default;
 };
 

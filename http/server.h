@@ -9,6 +9,7 @@ class Server {
 public:
     explicit Server(const api::Api& api);
     void run();
+    const api::Api& api() const { return api_; }
 
 private:
     const api::Api& api_;
