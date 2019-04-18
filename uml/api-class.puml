@@ -5,6 +5,7 @@ namespace api {
         + name() : string
         + request() : string
         + response(data : string)
+        + error(error : int)
     }
     interface Api {
         + execute([inout] rpc : Rpc)
