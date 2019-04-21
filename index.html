@@ -1,0 +1,78 @@
+<script type="application/javascript" language="JavaScript">
+    function choose(name) {
+        $("#user").html(name);
+        $.post("http://localhost:8080/amount",
+            JSON.stringify({user: name})
+        ).done(function(data) {
+            $("#amount").html(data.amount);
+        }).fail(function(_, status) {
+            alert("Request failed: " + status);
+        });
+        return false;
+    }
+    function send() {
+        var name = $("#user").html();
+        var to = $("#to").val();
+        var rub = Number($("#rub").val());
+        var desc = $("#desc").val();
+
+        $.post("http://localhost:8080/transfer/send",
+            JSON.stringify({
+                user: name,
+                recipient: to,
+                amount: rub,
+                description: desc
+            })
+        ).done(function(data) {
+            var name = $("#user").html();
+            $("#to").val("");
+            $("#rub").val("");
+            $("#desc").val("");
+            choose(name);
+            update();
+        }).fail(function(_, status) {
+            alert("Request failed: " + status);
+        });
+
+        return false;
+
+    }
+    function update() {
+        var name = $("#user").html();
+        $.post("http://localhost:8080/transfer",
+            JSON.stringify({user: name})
+        ).done(function(data) {
+            $("#list").html(JSON.stringify(data));
+        }).fail(function(_, status) {
+            alert("Request failed: " + status);
+        });
+    }
+</script>
+<html>
+<head>
+    <title>Moneybox</title>
+    <script language="JavaScript" type="application/javascript" src="jquery.js"></script>
+</head>
+<body>
+    <div>
+        <h1>Choose user: <span id="user">[name]</span> <span id="amount">[amount]</span> rub</h1>
+        <button onclick="return choose('Bone');">Bone</button>
+        <button onclick="choose('Nate');">Nate</button>
+    </div>
+    <div>
+        <h1>Send:</h1>
+        <br>
+            To:<input id="to"/>
+            Rub:<input id="rub"/>
+            Description:<input id="desc"/>
+            <button onclick="return send();">Send</button>
+        </form>
+    </div>
+    <div>
+        <h1>Transfers</h1>
+        <a onclick="return update();">update</a>
+        <div id="list">
+        </div>
+    </div>
+</body>
+</html>
