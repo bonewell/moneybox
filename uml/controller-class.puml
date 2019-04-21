@@ -1,0 +1,29 @@
+@startuml
+hide empty members
+namespace controller {
+    interface Controller {
+        + execute(args : json) : json
+    }
+    class Factory {
+        + create(name : string) : Controller
+    }
+    class Amount
+    class Transfer
+    class TransferSend
+
+    Controller <|.. Amount
+    Controller <|.. Transfer
+    Controller <|.. TransferSend
+    Amount <.. Factory : create
+    Transfer <.. Factory : create
+    TransferSend <.. Factory : create
+    model.User <.. Amount
+    Amount ..> view.Amount
+}
+namespace view {
+    class Amount
+}
+namespace model {
+    class User
+}
+@enduml

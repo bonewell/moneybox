@@ -1,18 +1,25 @@
-#include <iostream>
-#include <gsl/gsl>
-#include <boost/asio.hpp>
+#include "api/moneybox.h"
+#include "http/server.h"
+#include "model/user.h"
 
-using namespace std;
-
-
-void get(gsl::owner<int*> x) {
-    *x = 4;
+void init_db() {
+    for (auto name : {"Nate", "Bone"}) {
+        model::User user;
+        if (!user.fetch(user.name = name)) {
+            user.name = name;
+            user.amount = 1000;
+            user.save();
+        }
+    }
 }
 
 int main()
 {
-    cout << "Hello World!" << endl;
-    get(new int{});
+    init_db();
+
+    api::MoneyBox box;
+    http::Server server{box};
+    server.run();
 
     return 0;
 }

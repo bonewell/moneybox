@@ -1,0 +1,61 @@
+@startuml
+hide empty members
+namespace model {
+    namespace db {
+        interface Factory
+        interface Query
+        interface Command
+    }
+    abstract class Entity {
+        - fields : BaseFieldList
+        # factory : db.Factory
+        - registry(field : BaseField)
+        + Entity(name : string)
+        + save() : bool
+        + fetch(field : BaseField) : bool
+        + next() : bool
+    }
+    abstract class BaseField {
+        - name : string
+        - value : Variant
+        - entity : Entity
+        # set<T>(value : T)
+        # get<T>() : T
+        + BaseField(name : string, entity : Entity)
+        + name() : string
+        + value() : Variant
+    }
+    class Field<T> << template>> {
+        - name() : string
+        - value() : Variant
+        + Field(name : string, entity : Entity)
+        + operator=<T>(value : T) : Field
+        + operator=(other : Field) : Field
+        + operator<T>() : T
+    }
+    class User {
+        + User()
+        + name : Text
+        + amount : LongLong
+    }
+    class Transfer {
+        + Transfer()
+        + sender : Text
+        + recipient : Text
+        + amount : LongLong
+        + description : Text
+    }
+
+    BaseField <|-- Field
+    Field <|-- Int
+    Field <|-- Text
+    Field <|-- LongLong
+    model.db.Factory <.. Entity
+    model.db.Query <.. Entity
+    model.db.Command <.. Entity
+    Entity "1" .o BaseField
+    Entity o. "*" BaseField
+    Entity <|-- User
+    Entity <|-- Transfer
+}
+@enduml

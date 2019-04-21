@@ -1,0 +1,81 @@
+<script type="application/javascript" language="JavaScript">
+    function choose(name, to) {
+        $("#user").html(name);
+        $("#to").html(to);
+        $.post("http://localhost:8080/amount",
+            JSON.stringify({user: name})
+        ).done(function(data) {
+            $("#amount").html(data.amount);
+        }).fail(function(_, status) {
+            alert("Request failed: " + status);
+        });
+        update();
+        return false;
+    }
+    function send() {
+        var name = $("#user").html();
+        var to = $("#to").html();
+        var rub = Number($("#rub").val());
+        var desc = $("#desc").val();
+
+        $.post("http://localhost:8080/transfer/send",
+            JSON.stringify({
+                user: name,
+                recipient: to,
+                amount: rub,
+                description: desc
+            })
+        ).done(function(data) {
+            var name = $("#user").html();
+            var to = $("#to").html();
+            $("#rub").val("");
+            $("#desc").val("");
+            choose(name, to);
+        }).fail(function(_, status) {
+            alert("Request failed: " + status);
+        });
+
+        return false;
+
+    }
+    function update() {
+        var name = $("#user").html();
+        $.post("http://localhost:8080/transfer",
+            JSON.stringify({user: name})
+        ).done(function(data) {
+            $("#list").html("");
+            data.forEach(function(item) {
+              $("#list").append("<div>" + JSON.stringify(item) + "</div>")
+            });
+        }).fail(function(_, status) {
+            alert("Request failed: " + status);
+        });
+    }
+</script>
+<html>
+<head>
+    <title>Moneybox - demo</title>
+    <script language="JavaScript" type="application/javascript" src="jquery.js"></script>
+</head>
+<body>
+    <h1>Moneybox - demo</h1>
+    <div>
+        <h2>Choose user: <span id="user">[name]</span> <span id="amount">[amount]</span> rub</h2>
+        <button onclick="return choose('Bone', 'Nate');">Bone</button>
+        <button onclick="choose('Nate', 'Bone');">Nate</button>
+    </div>
+    <div>
+        <h2>Send:</h2>
+        <br>
+            To:<span id="to">[name]</span>
+            Rub:<input id="rub"/>
+            Description:<input id="desc"/>
+            <button onclick="return send();">Send</button>
+        </form>
+    </div>
+    <div>
+        <h2>Transfers</h2>
+        <div id="list"></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+@startuml
+namespace view {
+    interface View {
+        + render() : json
+    }
+    class Amount {
+        + amount : integer
+    }
+    class TransferSend {
+        + result : bool
+    }
+    class TransferData {
+        + sender : string
+        + recipient : string
+        + amount : integer
+        + description : string
+    }
+    class Transfer {
+        + transfers : TransferDataList
+    }
+
+    View <|.. Amount
+    View <|.. Transfer
+    View <|.. TransferSend
+    Transfer *.. "*" TransferData
+}
+@enduml

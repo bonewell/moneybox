@@ -1,0 +1,28 @@
+@startuml
+hide empty members
+namespace api {
+    interface Rpc {
+        + name() : string
+        + request() : string
+        + response(data : string)
+        + error(error : int)
+    }
+    interface Api {
+        + execute([inout] rpc : Rpc)
+    }
+    class MoneyBox {
+        - factory : controller.Factory
+    }
+
+    Api <|.. MoneyBox
+    Rpc <. MoneyBox
+    MoneyBox ..> controller.Controller
+    MoneyBox ..> controller.Factory
+}
+namespace controller {
+    interface Controller
+    class Factory
+
+    Factory .> Controller : create
+}
+@enduml

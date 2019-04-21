@@ -1,0 +1,25 @@
+@startuml
+hide empty members
+namespace api {
+    interface Api
+    interface Rpc
+}
+namespace http {
+    class Handle {
+        - name : string
+        - request : string
+        - response : string
+        + name(text : string)
+        + request(text : string)
+        + response() : string
+        + error() : int
+    }
+    class Server {
+        - api : Api
+    }
+
+    api.Rpc <|.. Handle
+    Handle <. Server : create
+    Server o. api.Api
+}
+@enduml
