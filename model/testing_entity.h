@@ -10,6 +10,7 @@ public:
     using Entity::factory_;
     using Entity::Entity;
     using Entity::registry;
+    using Entity::fetched_;
 };
 
 }  // namespace model

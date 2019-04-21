@@ -23,6 +23,7 @@ public:
 protected:
     static gsl::not_null<db::Factory*> factory_;
     void registry(gsl::not_null<BaseField*> field);
+    bool fetched_{false};
 
 private:
     std::string name_;

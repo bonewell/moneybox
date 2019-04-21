@@ -43,8 +43,9 @@ void MongoQuery::get(const std::string& name, Variant& value) {
 
 bool MongoQuery::execute() try {
     auto collection = db_[entity_];
-    bsoncxx::document::value doc = condition_ << bsoncxx::builder::stream::finalize;
-    cursor_ = collection.find(doc.view());
+    bsoncxx::document::value filter = condition_
+            << bsoncxx::builder::stream::finalize;
+    cursor_ = collection.find(filter.view());
     current_ = cursor_.begin();
     return true;
 } catch(const mongocxx::logic_error&) {

@@ -47,6 +47,19 @@ TEST_F(EntityTest, SetEntityOfCommand) {
     entity.save();
 }
 
+TEST_F(EntityTest, SetConditionOfCommand) {
+    Integer id{"id", &entity}; id = 2;
+
+    auto* command = new NiceMock<MockCommand>{};
+    ON_CALL(*factory, command())
+            .WillByDefault(Return(ByMove(db::CommandPtr{command})));
+
+    entity.fetched_ = true;
+    db::Variant value = int32_t{2};
+    EXPECT_CALL(*command, where("id", value));
+    entity.save();
+}
+
 TEST_F(EntityTest, SetFieldOfDocument) {
     Integer id{"id", &entity}; id = 3;
 
