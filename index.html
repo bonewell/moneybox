@@ -54,17 +54,18 @@
 </script>
 <html>
 <head>
-    <title>Moneybox</title>
+    <title>Moneybox - demo</title>
     <script language="JavaScript" type="application/javascript" src="jquery.js"></script>
 </head>
 <body>
+    <h1>Moneybox - demo</h1>
     <div>
-        <h1>Choose user: <span id="user">[name]</span> <span id="amount">[amount]</span> rub</h1>
+        <h2>Choose user: <span id="user">[name]</span> <span id="amount">[amount]</span> rub</h2>
         <button onclick="return choose('Bone', 'Nate');">Bone</button>
         <button onclick="choose('Nate', 'Bone');">Nate</button>
     </div>
     <div>
-        <h1>Send:</h1>
+        <h2>Send:</h2>
         <br>
             To:<span id="to">[name]</span>
             Rub:<input id="rub"/>
@@ -73,10 +74,8 @@
         </form>
     </div>
     <div>
-        <h1>Transfers</h1>
-        <a onclick="return update();">click me to up to date</a>
-        <div id="list">
-        </div>
+        <h2>Transfers</h2>
+        <div id="list"></div>
     </div>
 </body>
 </html>

@@ -15,6 +15,15 @@ cmake ..
 cmake -build .
 ```
 
+# Run
+## Run server
+```Shell
+./bin/moneybox
+```
+
+## Run UI
+Open `index.html` in browser
+
 # Protocol
 
 #### Get balance of the account ₽
