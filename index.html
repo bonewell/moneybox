@@ -9,6 +9,7 @@
         }).fail(function(_, status) {
             alert("Request failed: " + status);
         });
+        update();
         return false;
     }
     function send() {
@@ -26,10 +27,10 @@
             })
         ).done(function(data) {
             var name = $("#user").html();
+            var to = $("#to").html();
             $("#rub").val("");
             $("#desc").val("");
-            choose(name);
-            update();
+            choose(name, to);
         }).fail(function(_, status) {
             alert("Request failed: " + status);
         });
@@ -42,7 +43,10 @@
         $.post("http://localhost:8080/transfer",
             JSON.stringify({user: name})
         ).done(function(data) {
-            $("#list").html(JSON.stringify(data));
+            $("#list").html("");
+            data.forEach(function(item) {
+              $("#list").append("<div>" + JSON.stringify(item) + "</div>")
+            });
         }).fail(function(_, status) {
             alert("Request failed: " + status);
         });
