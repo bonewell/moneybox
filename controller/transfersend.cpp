@@ -17,6 +17,10 @@ json::json TransferSend::execute(const json::json &input) {
         transfer.amount = input["amount"];
         transfer.description = input["description"];
         view_.result = transfer.save();
+        user.amount = user.amount - transfer.amount;
+        recipient.amount = recipient.amount + transfer.amount;
+        user.save();
+        recipient.save();
     } else {
         view_.result = false;
     }

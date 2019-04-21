@@ -17,6 +17,10 @@ void Entity::registry(gsl::not_null<BaseField*> field) {
 bool Entity::save() {
     auto command = factory_->command();
     command->entity(name_);
+    if (fetched_) {
+        auto first = fields_[0];
+        command->where(first->name(), first->value());
+    }
     for (const auto& f: fields_) {
         command->set(f->name(), f->value());
     }
@@ -36,7 +40,7 @@ bool Entity::next() {
         for (auto& f: fields_) {
             query_->get(f->name(), f->value());
         }
-        return true;
+        return fetched_ = true;
     }
     return false;
 }
