@@ -1,6 +1,7 @@
 <script type="application/javascript" language="JavaScript">
-    function choose(name) {
+    function choose(name, to) {
         $("#user").html(name);
+        $("#to").html(to);
         $.post("http://localhost:8080/amount",
             JSON.stringify({user: name})
         ).done(function(data) {
@@ -12,7 +13,7 @@
     }
     function send() {
         var name = $("#user").html();
-        var to = $("#to").val();
+        var to = $("#to").html();
         var rub = Number($("#rub").val());
         var desc = $("#desc").val();
 
@@ -25,7 +26,6 @@
             })
         ).done(function(data) {
             var name = $("#user").html();
-            $("#to").val("");
             $("#rub").val("");
             $("#desc").val("");
             choose(name);
@@ -56,13 +56,13 @@
 <body>
     <div>
         <h1>Choose user: <span id="user">[name]</span> <span id="amount">[amount]</span> rub</h1>
-        <button onclick="return choose('Bone');">Bone</button>
-        <button onclick="choose('Nate');">Nate</button>
+        <button onclick="return choose('Bone', 'Nate');">Bone</button>
+        <button onclick="choose('Nate', 'Bone');">Nate</button>
     </div>
     <div>
         <h1>Send:</h1>
         <br>
-            To:<input id="to"/>
+            To:<span id="to">[name]</span>
             Rub:<input id="rub"/>
             Description:<input id="desc"/>
             <button onclick="return send();">Send</button>
@@ -70,7 +70,7 @@
     </div>
     <div>
         <h1>Transfers</h1>
-        <a onclick="return update();">update</a>
+        <a onclick="return update();">click me to up to date</a>
         <div id="list">
         </div>
     </div>
