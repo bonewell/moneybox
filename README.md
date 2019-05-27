@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/bonewell/moneybox.svg?branch=develop)](https://travis-ci.org/bonewell/moneybox)
+[![Coverage Status](https://coveralls.io/repos/github/bonewell/moneybox/badge.svg?branch=develop)](https://coveralls.io/github/bonewell/moneybox?branch=develop)
 
 # Prepare
 ## Install mongoDB 4.0
